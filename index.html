@@ -18,7 +18,7 @@
         .paper {
             background: #fffef0;
             background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
-            background-size: 100% 2.2rem;
+            background-size: 100% 2.4rem;
             width: 100%;
             max-width: 600px;
             padding: 30px 20px 30px 40px;
@@ -37,13 +37,15 @@
             font-weight: bold;
         }
 
+        /* Hizalama Bozulmasını Önleyen Düzen */
         .list-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Hizayı üste sabitler */
             font-size: 1.05rem;
-            line-height: 2.2rem;
+            line-height: 1.5;
             color: #111;
             font-weight: 600;
+            margin-bottom: 14px; /* Satır aralığı */
             word-break: break-word;
         }
 
@@ -54,7 +56,8 @@
             min-width: 24px;
             border: 2px solid #333;
             background-color: #fff;
-            margin-right: 10px;
+            margin-right: 12px;
+            margin-top: 2px; /* Metinle tam hizalama */
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -77,8 +80,8 @@
             border-color: #c0392b;
         }
 
-        .dash {
-            margin-right: 8px;
+        .text-content {
+            flex: 1;
         }
     </style>
 </head>
@@ -94,7 +97,7 @@
         "Din Kültürü: 40 - 50 sayfa defter",
         "Matematik: 100 yaprak kareli defter",
         "Fen Bilimleri: 80 - 100 kareli defter",
-        "Türkçe: 100 çizgili defter",
+        "Türkçe: 100 çizgili defter ve kompozisyon defteri",
         "Teknoloji Tasarım: 40 - 50 kareli büyük boy defter ve cetvel, A4 kağıdı",
         "İngilizce: 80 - 100 kareli defter",
         "Sosyal Bilgiler: 80 - 100 kareli defter",
@@ -137,8 +140,9 @@
             }
         });
 
-        const content = document.createElement("span");
-        content.innerHTML = `<span class="dash">-</span>${text}`;
+        const content = document.createElement("div");
+        content.className = "text-content";
+        content.textContent = `- ${text}`;
 
         row.appendChild(btn);
         row.appendChild(content);
