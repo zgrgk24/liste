@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>zgrgk okul listesi</title>
+    <style>
+        body {
+            background-color: #d8c3a5;
+            display: flex;
+            justify-content: center;
+            padding: 20px 10px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+        }
+
+        /* Gerçek Kağıt Görünümü */
+        .paper {
+            background: #fffef0;
+            background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+            background-size: 100% 2.2rem;
+            width: 100%;
+            max-width: 600px;
+            padding: 30px 20px 30px 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            border-left: 3px solid #ff8a80; /* Sol Defter Çizgisi */
+            border-radius: 2px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            font-size: 1.05rem;
+            line-height: 2.2rem;
+            color: #111;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        /* Tıklanabilir Kutucuk */
+        .checkbox-btn {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            border: 2px solid #333;
+            background-color: #fff;
+            margin-right: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 4px;
+            user-select: none;
+        }
+
+        .checkbox-btn.state-green {
+            background-color: #2ecc71;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .checkbox-btn.state-red {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+
+        .dash {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="paper">
+    <h1>zgrgk okul listesi</h1>
+    <div id="list-container"></div>
+</div>
+
+<script>
+    const items = [
+        "Din Kültürü: 40 - 50 sayfa defter",
+        "Matematik: 100 yaprak kareli defter",
+        "Fen Bilimleri: 80 - 100 kareli defter",
+        "Türkçe: 100 çizgili defter",
+        "Teknoloji Tasarım: 40 - 50 kareli büyük boy defter ve cetvel, A4 kağıdı",
+        "İngilizce: 80 - 100 kareli defter",
+        "Sosyal Bilgiler: 80 - 100 kareli defter",
+        "Görsel Sanatlar: resim çantası",
+        "Görsel Sanatlar: 35x50 büyük boy 15 - 20 sayfa resim defteri",
+        "Görsel Sanatlar: 2B ve 8B resim kalemi",
+        "Görsel Sanatlar: pastel boya",
+        "Görsel Sanatlar: kuru boya",
+        "Görsel Sanatlar: keçeli boya",
+        "Görsel Sanatlar: sulu boya",
+        "Görsel Sanatlar: su kabı",
+        "Görsel Sanatlar: okul makası",
+        "Görsel Sanatlar: Prit",
+        "Görsel Sanatlar: 1 paket el işi kağıdı",
+        "Görsel Sanatlar: 1 paket fon kartonu"
+    ];
+
+    const container = document.getElementById("list-container");
+
+    items.forEach((text) => {
+        const row = document.createElement("div");
+        row.className = "list-item";
+
+        // Kutucuk Yapısı (0: Boş, 1: Yeşil Tik, 2: Kırmızı Çarpı)
+        const btn = document.createElement("div");
+        btn.className = "checkbox-btn";
+        let state = 0; 
+
+        btn.addEventListener("click", () => {
+            state = (state + 1) % 3;
+            if (state === 0) {
+                btn.className = "checkbox-btn";
+                btn.textContent = "";
+            } else if (state === 1) {
+                btn.className = "checkbox-btn state-green";
+                btn.textContent = "✓";
+            } else if (state === 2) {
+                btn.className = "checkbox-btn state-red";
+                btn.textContent = "✕";
+            }
+        });
+
+        const content = document.createElement("span");
+        content.innerHTML = `<span class="dash">-</span>${text}`;
+
+        row.appendChild(btn);
+        row.appendChild(content);
+        container.appendChild(row);
+    });
+</script>
+
+</body>
+</html>
